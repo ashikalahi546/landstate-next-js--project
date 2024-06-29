@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+      --primary-color: #175CD3;
+    }
+.navberBorder{
+      height: 4px;      
+      background-color:var(--primary-color);
+      border-radius: 10px 10px 0px 0px;
+      margin-top: 5px;
+}
+
+.heroBottomShadow {
+      box-shadow: -2px 2px 10px rgba(0, 87, 255, 0.2);
+      border-radius: 20px;
+}
+
+.swiper-pagination-clickable .swiper-pagination-bullet {
+   display:none;
+  }
