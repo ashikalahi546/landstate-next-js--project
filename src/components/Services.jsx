@@ -22,7 +22,7 @@ const Services = () => {
               <p className="mt-[13px] leading-5 text-sm text-[#475467]">
                 {service?.discription}
               </p>
-              <button className="hover:bg-primary h-[55px] w-[156px] hover:font-medium font-regular mt-[26px] hover:text-white border-[#667085] border hover:border-none text-secondary duration-100 delay-150 rounded-[10px] bg-transparent">Learn More</button>
+              <button className="hover:bg-primary h-[55px] w-[156px] hover:font-medium font-regular mt-[26px] hover:text-white border-[#667085] border hover:border-none text-secondary duration-100  rounded-[10px] bg-transparent">Learn More</button>
             </div>
           ))}
         </div>

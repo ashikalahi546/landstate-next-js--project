@@ -92,7 +92,7 @@ const CityCard = () => {
                 <div className="relative">
                   <Image
                     src={singleCard?.image}
-                    alt=""
+                    alt="loading"
                     width={312}
                     height={194}
                   />
@@ -103,7 +103,7 @@ const CityCard = () => {
                     </p>
                   </div>
                 </div>
-                <div className="border rounded-b-3xl py-4 px-4 bg-white ">
+                <div className="border rounded-b-3xl py-4 px-4 bg-white w-[312px]">
                   <div className="flex items-center justify-between	">
                     <h1 className="text-lg font-semibold">
                       ${singleCard?.price}
@@ -133,7 +133,7 @@ const CityCard = () => {
                       {singleCard?.location}
                     </p>
                   </div>
-                  <button className="text-[#101010] mt-6  border border-[#D0D5DD] h-[41px] w-full rounded-lg hover:bg-primary hover:border-none text-sm font-medium hover:text-white duration-100 delay-150">
+                  <button className="text-[#101010] mt-6  border border-[#D0D5DD] h-[41px] w-full rounded-lg hover:bg-primary hover:border-none text-sm font-medium hover:text-white duration-100 ">
                     View Details
                   </button>
                 </div>

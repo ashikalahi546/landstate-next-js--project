@@ -1,13 +1,27 @@
+"use client"
+
 import Image from "next/image";
-import hero from "/public/image/hero.png";
+import hero from "/public/image/hero2.png";
 import { LeftArrowIcon, LocationTwoIcon, RightArrowIcon } from "@/assets/Icons";
+// import Carousel from "./Carousel";
+
+// import { Swiper, SwiperSlide } from "swiper/react";
+// import "swiper/css";
+// import "swiper/css/pagination";
+// import { Pagination } from "swiper/modules";
+
+const slides = [
+  {image:"/image/hero.png"},
+  {image:"/image/hero1.png"},
+  {image:"/image/hero2.png"},
+]
 const Hero = () => {
   return (
     <div className="bg-[#EFEFEF]  ">
       <div className="bg-white">
-        <div className="mt-[70px] flex justify-between w-[1320px] mx-auto pb-[126px] ">
+        <div className="mt-[70px] flex justify-between gap-[93px] w-[1320px] mx-auto pb-[126px] ">
           <div>
-            <h1 className="text-6xl font-bold leading-[80px] text-secondary">
+            <h1 className="text-6xl font-bold leading-[80px] text-secondary ">
               Discover Most
               <span className="block">
                 Suitable <span className="text-primary">Property</span>
@@ -57,12 +71,36 @@ const Hero = () => {
             </div>
           </div>
           <div>
+
+{/* <Carousel>
+  {
+    slides.map((slide,idx)=>(
+      <Image className="rounded-b-[50px] w-[683px] height=[474px] duration-500" key={idx} src={slide?.image} width={683} height={474} alt="loading" priority />
+    ))
+  }
+</Carousel> */}
+
             <Image src={hero} alt="loading" priority />
             <div className="flex  gap-5 justify-end items-center -mt-14 ">
-              <LeftArrowIcon/>
+             <button> <LeftArrowIcon/></button>
 
-              <RightArrowIcon />
+              <button><RightArrowIcon /></button>
             </div>
+
+{/* 
+            <Swiper
+         pagination={true} modules={[Pagination]} className="mySwiper"
+        >
+          {slides.map((slide,idx) => (
+            <SwiperSlide key={idx} >
+            <Image className="w-[683px]"  src={slide?.image} width={683} height={474} alt="loading" priority />
+            </SwiperSlide>
+          ))}
+        </Swiper>
+       */}
+
+   
+
           </div>
         </div>
       </div>
@@ -70,13 +108,13 @@ const Hero = () => {
       <div className=" ">
         <div className="w-[1056px] mx-auto h-[202px] heroBottomShadow bg-white -mt-[76px] px-14 py-[38px]">
           <div>
-            <button className="w-[110px] h-[36px] font-medium leading-6 hover:bg-primary hover:text-white rounded-md bg-transparent text-secondary duration-100 delay-150 border border-secondary hover:border-none">
+            <button className="w-[110px] h-[36px] font-medium leading-6 hover:bg-primary hover:text-white rounded-md bg-transparent text-secondary duration-100 border border-[#98A2B3] hover:border-none">
               Buy
             </button>
-            <button className="mx-[10px] w-[110px] h-[36px] font-medium hover:bg-primary hover:text-white rounded-md bg-transparent text-secondary duration-100 delay-150 border border-secondary hover:border-none">
+            <button className="mx-[10px] w-[110px] h-[36px] font-medium hover:bg-primary hover:text-white rounded-md bg-transparent text-secondary duration-100 border border-[#98A2B3] hover:border-none">
               Sell
             </button>
-            <button className="w-[110px] h-[36px] font-medium hover:bg-primary hover:text-white rounded-md bg-transparent text-secondary duration-100 delay-150 border border-secondary hover:border-none">
+            <button className="w-[110px] h-[36px] font-medium hover:bg-primary hover:text-white rounded-md bg-transparent text-secondary duration-100 border border-[#98A2B3] hover:border-none">
               Rent
             </button>
           </div>

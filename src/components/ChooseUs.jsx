@@ -5,7 +5,7 @@ function ChooseUs() {
   
   return (
     <div className="bg-white py-[42px] mb-[120px]">
-  <h1 className="text-[#101010] text-[42px] font-semibold leading-[60px] text-center">WHY CHOOSE <span className="text-primary">US</span> </h1>
+  <h1 className="text-[#101010] text-[40px] font-semibold leading-[60px] text-center">WHY CHOOSE <span className="text-primary">US</span> </h1>
   <div className="w-[1320px] mx-auto">
     <div className="grid grid-cols-3 gap-[93px] mt-9">
       {
