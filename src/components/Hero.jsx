@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useState,useRef ,useEffect} from "react";
 import hero from "/public/image/hero2.png";
 import {
   LeftArrowIcon,
@@ -20,17 +20,27 @@ import { selectedData } from "./selectedData/SelectedData";
 import { FaChevronDown } from "react-icons/fa6";
 
 const Hero = () => {
+  const [activeButton, setAciveButton] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const handleClick = (buttonName) => {
+    setAciveButton(buttonName);
+  };
 
+  const getButtonClass = (buttonName) => {
+    return buttonName === activeButton
+      ? "w-[110px] h-[36px] font-medium leading-6 text-white  bg-blue-500 hover:text-white rounded-md text-secondary duration-100 hover:border-none"
+      : "w-[110px] h-[36px] font-medium leading-6 hover:bg-primary hover:text-white rounded-md bg-transparent text-secondary duration-100 border border-[#98A2B3] hover:border-none ";
+  };
 
-const prevSlide = () => {
-  setCurrentIndex((prevIndex) => (prevIndex - 1 + slides.length) % slides.length);
-};
+  const prevSlide = () => {
+    setCurrentIndex(
+      (prevIndex) => (prevIndex - 1 + slides.length) % slides.length
+    );
+  };
 
-const nextSlide = () => {
-  setCurrentIndex((prevIndex) => (prevIndex + 1) % slides.length);
-};
-
+  const nextSlide = () => {
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % slides.length);
+  };
 
   const [selected, setSelected] = useState("");
   const [select, setSelect] = useState("");
@@ -40,6 +50,21 @@ const nextSlide = () => {
   const [openTwo, setOpenTwo] = useState(false);
   const [openThree, setOpenThree] = useState(false);
   const [openFour, setOpenFour] = useState(false);
+  const dropDownRef = useRef(null)
+
+useEffect(()=>{
+  const handleClickOutsile =(event)=>{  
+    console.log("event target",event.target);
+    console.log("ref",dropDownRef);
+    if(dropDownRef.current && !dropDownRef.current.contains(event.target)){
+      setOpen(false)
+    }
+  }
+  document.addEventListener("mousedown",handleClickOutsile)
+  return()=>{
+    document.removeEventListener("mousedown",handleClickOutsile)
+  }
+},[])
 
   return (
     <div className="bg-[#EFEFEF]  ">
@@ -95,59 +120,59 @@ const nextSlide = () => {
               </div>
             </div>
           </div>
-        <div>
-        <div  className="relative w-[683px] mx-auto" >
+          <div>
+            <div className="relative w-[683px] mx-auto">
+              <div className="relative h-[474px]  overflow-hidden  ">
+                {slides.map((src, index) => (
+                  <div
+                    key={index}
+                    className={`absolute  w-full  duration-500 ease-in-out ${
+                      index === currentIndex ? "opacity-100" : "opacity-0"
+                    }`}
+                  >
+                    <Image
+                      width={683}
+                      height={474}
+                      src={src.image}
+                      className="w-full"
+                      alt=""
+                    />
+                  </div>
+                ))}
+              </div>
 
-      <div className="relative h-[474px]  overflow-hidden  ">
-        {slides.map((src, index) => (
-          <div
-          
-            key={index}
-            className={`absolute  w-full  duration-300 ease-in-out ${
-              index === currentIndex ? 'opacity-100' : 'opacity-0'
-            }`}
-
-          >
-            <Image width={683} height={474} src={src.image} className="w-full" alt="" />
+              <div className="flex gap-5 relative justify-end -mt-12">
+                <button onClick={prevSlide}>
+                  <LeftArrowIcon></LeftArrowIcon>
+                </button>
+                <button onClick={nextSlide}>
+                  <RightArrowIcon></RightArrowIcon>
+                </button>
+              </div>
+            </div>
           </div>
-        ))}
-      </div>
-
-<div className="flex gap-5 relative justify-end -mt-12">
-  
-<button
- 
-
- onClick={prevSlide}
-
->
-<LeftArrowIcon></LeftArrowIcon>
-</button>
-<button
-
- onClick={nextSlide}
-
->
-<RightArrowIcon></RightArrowIcon>
-</button>
-</div>
-    </div>
-
-     
-        </div>
         </div>
       </div>
 
       <div className=" ">
         <div className="w-[1056px] mx-auto h-[202px] heroBottomShadow bg-white -mt-[76px] px-14 py-[38px]">
-          <div>
-            <button className="w-[110px] h-[36px] font-medium leading-6 hover:bg-primary hover:text-white rounded-md bg-transparent text-secondary duration-100 border border-[#98A2B3] hover:border-none">
+          <div className="flex gap-[10px]">
+            <button
+              onClick={() => handleClick("buy")}
+              className={getButtonClass("buy")}
+            >
               Buy
             </button>
-            <button className="mx-[10px] w-[110px] h-[36px] font-medium hover:bg-primary hover:text-white rounded-md bg-transparent text-secondary duration-100 border border-[#98A2B3] hover:border-none">
+            <button
+              onClick={() => handleClick("sell")}
+              className={getButtonClass("sell")}
+            >
               Sell
             </button>
-            <button className="w-[110px] h-[36px] font-medium hover:bg-primary hover:text-white rounded-md bg-transparent text-secondary duration-100 border border-[#98A2B3] hover:border-none">
+            <button
+              onClick={() => handleClick("rent")}
+              className={getButtonClass("rent")}
+            >
               Rent
             </button>
           </div>
@@ -156,13 +181,12 @@ const nextSlide = () => {
             <div className="flex flex-col gap-1 ">
               <p className="font-medium leading-[22px]">Location</p>
 
-              <div className=" w-[245px]">
+              <div  ref={dropDownRef} className=" w-[245px]">
                 <div
                   onClick={() => setOpen(!open)}
                   className="w-full border-[#98A2B3] border h-10  rounded-md px-[10px] text-xs leading-[14px] text-secondary flex items-center justify-between cursor-pointer"
                 >
                   <p>{selected ? selected : "Bangladesh"}</p>
-                  <LocationTwoIcon />
                 </div>
 
                 <ul
