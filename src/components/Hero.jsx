@@ -9,12 +9,6 @@ import {
   RightArrowIcon,
   DownIcon,
 } from "@/assets/Icons";
-// import Carousel from "./Carousel";
-
-// import { Swiper, SwiperSlide } from "swiper/react";
-// import "swiper/css";
-// import "swiper/css/pagination";
-// import { Pagination } from "swiper/modules";
 
 const slides = [
   { image: "/image/hero.png" },
@@ -26,6 +20,18 @@ import { selectedData } from "./selectedData/SelectedData";
 import { FaChevronDown } from "react-icons/fa6";
 
 const Hero = () => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+
+const prevSlide = () => {
+  setCurrentIndex((prevIndex) => (prevIndex - 1 + slides.length) % slides.length);
+};
+
+const nextSlide = () => {
+  setCurrentIndex((prevIndex) => (prevIndex + 1) % slides.length);
+};
+
+
   const [selected, setSelected] = useState("");
   const [select, setSelect] = useState("");
   const [selectTwo, setSelectTwo] = useState("");
@@ -89,38 +95,46 @@ const Hero = () => {
               </div>
             </div>
           </div>
-          <div>
-            {/* <Carousel>
-  {
-    slides.map((slide,idx)=>(
-      <Image className="rounded-b-[50px] w-[683px] height=[474px] duration-500" key={idx} src={slide?.image} width={683} height={474} alt="loading" priority />
-    ))
-  }
-</Carousel> */}
+        <div>
+        <div  className="relative w-[683px] mx-auto" >
 
-            <Image src={hero} alt="loading" priority />
-            <div className="flex  gap-5 justify-end items-center -mt-14 ">
-              <button>
-                <LeftArrowIcon />
-              </button>
+      <div className="relative h-[474px]  overflow-hidden  ">
+        {slides.map((src, index) => (
+          <div
+          
+            key={index}
+            className={`absolute  w-full  duration-300 ease-in-out ${
+              index === currentIndex ? 'opacity-100' : 'opacity-0'
+            }`}
 
-              <button>
-                <RightArrowIcon />
-              </button>
-            </div>
-
-            {/* 
-            <Swiper
-         pagination={true} modules={[Pagination]} className="mySwiper"
-        >
-          {slides.map((slide,idx) => (
-            <SwiperSlide key={idx} >
-            <Image className="w-[683px]"  src={slide?.image} width={683} height={474} alt="loading" priority />
-            </SwiperSlide>
-          ))}
-        </Swiper>
-       */}
+          >
+            <Image width={683} height={474} src={src.image} className="w-full" alt="" />
           </div>
+        ))}
+      </div>
+
+<div className="flex gap-5 relative justify-end -mt-12">
+  
+<button
+ 
+
+ onClick={prevSlide}
+
+>
+<LeftArrowIcon></LeftArrowIcon>
+</button>
+<button
+
+ onClick={nextSlide}
+
+>
+<RightArrowIcon></RightArrowIcon>
+</button>
+</div>
+    </div>
+
+     
+        </div>
         </div>
       </div>
 
@@ -204,66 +218,61 @@ const Hero = () => {
             <div className="flex flex-col gap-1">
               <p className="font-medium leading-[22px]">Property type</p>
               <div className="flex">
-              
-              <div className="w-[136px]">
-                <div
-                  onClick={() => setOpenThree(!openThree)}
-                  className="border-[#98A2B3] border-y border-l h-10  rounded-l-md
-
- px-[10px] text-xs leading-[14px] text-secondary flex items-center justify-between cursor-pointer"
-                >
-                  <p>{selectTwo ? selectTwo : "$1,000"}</p>
-                  <FaChevronDown
-                    className={`${openThree ? "rotate-180 duration-300" : ""}`}
-                  />
-
-               
+                <div className="w-[136px]">
+                  <div
+                    onClick={() => setOpenThree(!openThree)}
+                    className="border-[#98A2B3] border-y border-l h-10  rounded-l-md px-[10px] text-xs leading-[14px] text-secondary flex items-center justify-between cursor-pointer"
+                  >
+                    <p>{selectTwo ? selectTwo : "$1,000"}</p>
+                    <FaChevronDown
+                      className={`${
+                        openThree ? "rotate-180 duration-300" : ""
+                      }`}
+                    />
+                  </div>
+                  <ul
+                    className={`w-full bg-[#FFFFFF] select-box-shadow   overflow-y-auto   rounded-md  text-xs leading-[14px] text-secondary mt-2 cursor-pointer ${
+                      openThree ? "max-h-36" : "max-h-0"
+                    } `}
+                  >
+                    {selectedData.map((propertyThree, idx) => (
+                      <li
+                        onClick={() => setSelectTwo(propertyThree.name)}
+                        className="text-center py-2.5 hover:bg-[#F2F7FF] duration-100"
+                        key={idx}
+                      >
+                        {propertyThree.name}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-                <ul
-                  className={`w-full bg-[#FFFFFF] select-box-shadow   overflow-y-auto   rounded-md  text-xs leading-[14px] text-secondary mt-2 cursor-pointer ${
-                    openThree ? "max-h-36" : "max-h-0"
-                  } `}
-                >
-                  {selectedData.map((propertyThree, idx) => (
-                    <li
-                      onClick={() => setSelectTwo(propertyThree.name)}
-                      className="text-center py-2.5 hover:bg-[#F2F7FF] duration-100"
-                      key={idx}
-                    >
-                      {propertyThree.name}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            
-              <div className="w-[136px]">
-                <div
-                  onClick={() => setOpenFour(!openFour)}
-                  className="border-[#98A2B3] border-y border h-10 rounded-r-md  px-[10px] text-xs leading-[14px] text-secondary flex items-center justify-between cursor-pointer"
-                >
-                  <p>{selectThree ? selectThree : "$5,000"}</p>
-                  <FaChevronDown
-                    className={`${openFour ? "rotate-180 duration-300" : ""}`}
-                  />
 
-               
+                <div className="w-[136px]">
+                  <div
+                    onClick={() => setOpenFour(!openFour)}
+                    className="border-[#98A2B3] border-y border h-10 rounded-r-md  px-[10px] text-xs leading-[14px] text-secondary flex items-center justify-between cursor-pointer"
+                  >
+                    <p>{selectThree ? selectThree : "$5,000"}</p>
+                    <FaChevronDown
+                      className={`${openFour ? "rotate-180 duration-300" : ""}`}
+                    />
+                  </div>
+                  <ul
+                    className={`w-full bg-[#FFFFFF] select-box-shadow   overflow-y-auto   rounded-md  text-xs leading-[14px] text-secondary mt-2 cursor-pointer ${
+                      openFour ? "max-h-36" : "max-h-0"
+                    } `}
+                  >
+                    {selectedData.map((propertyFour, edx) => (
+                      <li
+                        onClick={() => setSelectThree(propertyFour.name)}
+                        className="text-center py-2.5 hover:bg-[#F2F7FF] duration-100"
+                        key={edx}
+                      >
+                        {propertyFour.name}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-                <ul
-                  className={`w-full bg-[#FFFFFF] select-box-shadow   overflow-y-auto   rounded-md  text-xs leading-[14px] text-secondary mt-2 cursor-pointer ${
-                    openFour ? "max-h-36" : "max-h-0"
-                  } `}
-                >
-                  {selectedData.map((propertyFour, edx) => (
-                    <li
-                      onClick={() => setSelectThree(propertyFour.name)}
-                      className="text-center py-2.5 hover:bg-[#F2F7FF] duration-100"
-                      key={edx}
-                    >
-                      {propertyFour.name}
-                    </li>
-                  ))}
-                </ul>
-              </div>
               </div>
             </div>
             <button className="w-[134px] h-[40px]  bg-primary text-white rounded-md font-medium leading-[22px] mt-[25.5px] ">
