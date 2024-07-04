@@ -1,8 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import { useState,useRef ,useEffect} from "react";
+import { useState, useRef, useEffect } from "react";
 import hero from "/public/image/hero2.png";
+import { HandleOutsideClickEvent } from "@/components/OutsideClick";
 import {
   LeftArrowIcon,
   LocationTwoIcon,
@@ -50,37 +51,43 @@ const Hero = () => {
   const [openTwo, setOpenTwo] = useState(false);
   const [openThree, setOpenThree] = useState(false);
   const [openFour, setOpenFour] = useState(false);
-  const dropDownRef = useRef(null)
-  const dropDownRefTwo = useRef(null)
-  const dropDownRefThree = useRef(null)
-  const dropDownRefFour = useRef(null)
 
-useEffect(()=>{
-  const handleClickOutsile =(event)=>{  
-    // console.log("event target",event.target);
-    // console.log("ref",dropDownRef);
-    if(dropDownRef.current && !dropDownRef.current.contains(event.target)){
-      setOpen(false)
+  const dropdownRef = useRef(null);
+  const dropdownRef2 = useRef(null);
+  HandleOutsideClickEvent(dropdownRef, setOpen);
+  HandleOutsideClickEvent(dropdownRef2, setOpenTwo);
 
-    }
-    if(dropDownRefTwo.current && !dropDownRefTwo.current.contains(event.target)){
-      setOpenTwo(false)
+  // useEffect(()=>{
+  //   const handleClickOutsile =(event)=>{
+  //     if(dropdownRef.current && !dropdownRef.current.contains(event.target)){
+  //       setOpen(false)
 
-    }
-    if(dropDownRefThree.current && !dropDownRefThree.current.contains(event.target)){
-      setOpenThree(false)
+  //     }
 
-    }
-    if(dropDownRefFour.current && !dropDownRefFour.current.contains(event.target)){
-      setOpenFour(false)
+  //   }
+  //   document.addEventListener("mousedown",handleClickOutsile)
+  //   return()=>{
+  //     document.removeEventListener("mousedown",handleClickOutsile)
+  //   }
+  // },[])
 
-    }
-  }
-  document.addEventListener("mousedown",handleClickOutsile)
-  return()=>{
-    document.removeEventListener("mousedown",handleClickOutsile)
-  }
-},[])
+  const handleItemClick = (item) => {
+    setSelected(item.name);
+    setOpen(false);
+  };
+
+  // const handleItemClickTwo = (property) => {
+  //   setSelect(property.name);
+  //   setOpenTwo(false);
+  // };
+  // const handleItemClickThree = (propertyThree) => {
+  //   setSelectTwo(propertyThree.name);
+  //   setOpenThree(false);
+  // };
+  // const handleItemClickFour = (propertyThree) => {
+  //   setSelectThree(propertyThree.name);
+  //   setOpenFour(false);
+  // };
 
   return (
     <div className="bg-[#EFEFEF]  ">
@@ -197,24 +204,26 @@ useEffect(()=>{
             <div className="flex flex-col gap-1 ">
               <p className="font-medium leading-[22px]">Location</p>
 
-              <div  ref={dropDownRef} className=" w-[245px]">
+              <div ref={dropdownRef} className=" w-[245px] !bg-red-500 border">
                 <div
-                  onClick={() => setOpen(!open)}
+                  onClick={() => setOpen(true)}
                   className="w-full border-[#98A2B3] border h-10  rounded-md px-[10px] text-xs leading-[14px] text-secondary flex items-center justify-between cursor-pointer"
                 >
                   <p>{selected ? selected : "Bangladesh"}</p>
-                  <LocationTwoIcon/>
+                  <LocationTwoIcon />
                 </div>
 
                 <ul
-                  className={`w-full bg-[#FFFFFF] select-box-shadow  overflow-y-auto   rounded-md  text-xs leading-[14px] text-secondary mt-2 ${
-                    open ? "max-h-36  border border-[#E4E4E5] " : "max-h-0"
+                  className={`w-full bg-[#FFFFFF] select-box-shadow  overflow-y-auto   rounded-md  text-xs leading-[14px] text-secondary mt-2 border border-[#E4E4E5] ${
+                    open
+                      ? "max-h-36 opacity-100 duration-200 "
+                      : "max-h-0 opacity-0 duration-100"
                   }`}
                 >
                   {selectedData.map((item) => (
                     <li
-                      onClick={() => setSelected(item.name)}
-                      className="py-2.5 hover:bg-[#F2F7FF] duration-100 text-center cursor-pointer"
+                      onClick={() => handleItemClick(item)}
+                      className={` h-10 hover:bg-[#F2F7FF] flex flex-col items-center justify-center text-center cursor-pointer `}
                       key={item.code}
                     >
                       {item?.name}
@@ -227,8 +236,9 @@ useEffect(()=>{
             <div className="flex flex-col gap-1">
               <p className="font-medium leading-[22px]">Property type</p>
 
-              <div   ref={dropDownRefTwo}  className="w-[245px]">
+              <div className="w-[245px]">
                 <div
+                ref={dropdownRef2}
                   onClick={() => setOpenTwo(!openTwo)}
                   className="border-[#98A2B3]  border h-10  rounded-md px-[10px] text-xs leading-[14px] text-secondary flex items-center justify-between cursor-pointer"
                 >
@@ -241,13 +251,13 @@ useEffect(()=>{
                 </div>
                 <ul
                   className={`w-full bg-[#FFFFFF] select-box-shadow   overflow-y-auto   rounded-md  text-xs leading-[14px] text-secondary mt-2 cursor-pointer ${
-                    openTwo ? "max-h-36" : "max-h-0"
+                    openTwo ? "max-h-36 duration-200" : "max-h-0  duration-100"
                   } `}
                 >
                   {selectedData.map((property, i) => (
                     <li
-                      onClick={() => setSelect(property.name)}
-                      className="text-center py-2.5 hover:bg-[#F2F7FF] duration-100"
+                      onClick={() => handleItemClickTwo(property)}
+                      className=" h-10 hover:bg-[#F2F7FF] flex flex-col items-center justify-center text-center cursor-pointer "
                       key={i}
                     >
                       {property.name}
@@ -259,7 +269,7 @@ useEffect(()=>{
             <div className="flex flex-col gap-1">
               <p className="font-medium leading-[22px]">Property type</p>
               <div className="flex">
-                <div ref={dropDownRefThree} className="w-[136px]">
+                <div className="w-[136px]">
                   <div
                     onClick={() => setOpenThree(!openThree)}
                     className="border-[#98A2B3] border-y border-l h-10  rounded-l-md px-[10px] text-xs leading-[14px] text-secondary flex items-center justify-between cursor-pointer"
@@ -273,12 +283,14 @@ useEffect(()=>{
                   </div>
                   <ul
                     className={`w-full bg-[#FFFFFF] select-box-shadow   overflow-y-auto   rounded-md  text-xs leading-[14px] text-secondary mt-2 cursor-pointer ${
-                      openThree ? "max-h-36" : "max-h-0"
+                      openThree
+                        ? "max-h-36 duration-200"
+                        : "max-h-0 duration-100"
                     } `}
                   >
                     {selectedData.map((propertyThree, idx) => (
                       <li
-                        onClick={() => setSelectTwo(propertyThree.name)}
+                        onClick={() => handleItemClickThree(propertyThree)}
                         className="text-center py-2.5 hover:bg-[#F2F7FF] duration-100"
                         key={idx}
                       >
@@ -288,7 +300,7 @@ useEffect(()=>{
                   </ul>
                 </div>
 
-                <div ref={dropDownRefFour} className="w-[136px]">
+                <div className="w-[136px]">
                   <div
                     onClick={() => setOpenFour(!openFour)}
                     className="border-[#98A2B3] border-y border h-10 rounded-r-md  px-[10px] text-xs leading-[14px] text-secondary flex items-center justify-between cursor-pointer"
@@ -300,13 +312,15 @@ useEffect(()=>{
                   </div>
                   <ul
                     className={`w-full bg-[#FFFFFF] select-box-shadow   overflow-y-auto   rounded-md  text-xs leading-[14px] text-secondary mt-2 cursor-pointer ${
-                      openFour ? "max-h-36" : "max-h-0"
+                      openFour
+                        ? "max-h-36 duration-200"
+                        : "max-h-0 duration-100"
                     } `}
                   >
                     {selectedData.map((propertyFour, edx) => (
                       <li
-                        onClick={() => setSelectThree(propertyFour.name)}
-                        className="text-center py-2.5 hover:bg-[#F2F7FF] duration-100"
+                        onClick={() => handleItemClickFour(propertyFour)}
+                        className=" h-10 hover:bg-[#F2F7FF] flex flex-col items-center justify-center text-center cursor-pointer "
                         key={edx}
                       >
                         {propertyFour.name}

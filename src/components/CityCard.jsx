@@ -9,12 +9,12 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 
-// import './styles.css';
+import { useState } from "react";
 
 // import required modules
 import { Pagination } from "swiper/modules";
 
-import { cityCardData } from "./cityCardData/CityCardData";
+import { cityDetails } from "./cityCardData/CityCardData";
 import Image from "next/image";
 import {
   RoomIcon,
@@ -24,58 +24,55 @@ import {
 } from "./../assets/Icons";
 
 const CityCard = () => {
-  const pathName = usePathname();
   const routes = [
-    {
-      name: "Chicago",
-      path: "/",
-    },
-    {
-      name: "New York",
-      path: "/york",
-    },
-    {
-      name: "San Francisco ",
-      path: "/san francisco ",
-    },
-    {
-      name: "Los Angeles",
-      path: "/los angeles",
-    },
-    {
-      name: "Las Vegas",
-      path: "/Las Vegas",
-    },
-    {
-      name: "Seattle",
-      path: "/seattle",
-    },
-    {
-      name: "Austin",
-      path: "/austin",
-    },
+    { id: 1, name: "Chicago" },
+    { id: 2, name: "New York" },
+    { id: 3, name: "San Francisco " },
+    { id: 4, name: "Los Angeles" },
+    { id: 5, name: "Las Vegas" },
+    { id: 6, name: "Seattle" },
+    { id: 7, name: "Austin" },
   ];
+
+  const [activeTab, setActiveTab] = useState(null);
+
+  const filterData = activeTab
+    ? cityDetails.filter((city) => city.name === activeTab)
+    : cityDetails;
+
   return (
     <div className="w-[1320px] mx-auto pb-[120px]">
       <h1 className="text-secondary text-[40px] font-semibold leading-[56px]">
         BROWSE PROPERTY BY <span className="text-primary">CITY</span>
       </h1>
-
-      <ul className="mt-5 flex items-center gap-10">
-        {routes?.map((route, idx) => (
-          <Link
-            href={route.path}
-            key={idx}
-            className={`text-sm font-medium text-secondary flex items-center justify-center  leading-[21px] ${
-              pathName === route.path &&
-              "w-[100px] h-[35px] bg-primary rounded-md text-white"
+      <div className="flex items-center mt-5 gap-10">
+        <button
+          onClick={() => setActiveTab(null)}
+          className={`text-sm font-medium leading-[21px] 
+            ${
+              activeTab === null
+                ? "bg-primary text-white rounded-md  py-[7px] px-[22px]"
+                : "text-secondary"
             }`}
-          >
-            {route?.name}
-          </Link>
-        ))}
-      </ul>
-
+        >
+          All Cities
+        </button>
+        <button className="flex items-center gap-10">
+          {routes?.map((route, idx) => (
+            <div
+              onClick={() => setActiveTab(route.name)}
+              key={idx}
+              className={`text-sm font-medium text-secondary flex items-center justify-center   leading-[21px] ${
+                activeTab === route.name
+                  ? "bg-primary text-white py-[7px] px-[22px] rounded-md"
+                  : ""
+              } `}
+            >
+              {route?.name}
+            </div>
+          ))}
+        </button>
+      </div>
       <div>
         <Swiper
           slidesPerView={4}
@@ -86,10 +83,10 @@ const CityCard = () => {
           modules={[Pagination]}
           className="mySwiper"
         >
-          {cityCardData.map((singleCard) => (
+          {filterData.map((singleCard) => (
             <SwiperSlide key={singleCard.id} className="mt-10 cursor-pointer">
-              <div>
-                <div className="relative">
+              <div className="">
+                <div className="relative ">
                   <Image
                     src={singleCard?.image}
                     alt="loading"
@@ -103,7 +100,7 @@ const CityCard = () => {
                     </p>
                   </div>
                 </div>
-                <div className="border rounded-b-3xl py-4 px-4 bg-white w-[312px]">
+                <div className="border rounded-b-3xl py-4 px-4 bg-white w-[312px] h-[273px]">
                   <div className="flex items-center justify-between	">
                     <h1 className="text-lg font-semibold">
                       ${singleCard?.price}
@@ -112,7 +109,7 @@ const CityCard = () => {
                       ({singleCard?.rating})
                     </p>
                   </div>
-                  <h3 className="pt-6">{singleCard?.fashion}</h3>
+                  <h3 title={singleCard?.fashion} className="pt-6">{singleCard?.fashion.slice(0,30)}...</h3>
                   <div className="flex items-center gap-[29px] pt-4">
                     <div className="flex items-center gap-2">
                       <RoomIcon />
@@ -123,7 +120,7 @@ const CityCard = () => {
                     <div className="flex items-center gap-2 ">
                       <BatroomIcon />
                       <p className="text-[#475467] text-sm">
-                        {singleCard?.batroom}
+                        {singleCard?.bathroom}
                       </p>
                     </div>
                   </div>
@@ -133,7 +130,7 @@ const CityCard = () => {
                       {singleCard?.location}
                     </p>
                   </div>
-                  <button className="text-[#101010] mt-6  border border-[#D0D5DD] h-[41px] w-full rounded-lg hover:bg-primary hover:border-none text-sm font-medium hover:text-white duration-100 ">
+                  <button className="text-[#101010] absolute bottom-5  left-4   border border-[#D0D5DD] h-[41px] w-[280px] rounded-lg hover:bg-primary hover:border-none text-sm font-medium hover:text-white duration-100 ">
                     View Details
                   </button>
                 </div>
