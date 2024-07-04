@@ -51,13 +51,29 @@ const Hero = () => {
   const [openThree, setOpenThree] = useState(false);
   const [openFour, setOpenFour] = useState(false);
   const dropDownRef = useRef(null)
+  const dropDownRefTwo = useRef(null)
+  const dropDownRefThree = useRef(null)
+  const dropDownRefFour = useRef(null)
 
 useEffect(()=>{
   const handleClickOutsile =(event)=>{  
-    console.log("event target",event.target);
-    console.log("ref",dropDownRef);
+    // console.log("event target",event.target);
+    // console.log("ref",dropDownRef);
     if(dropDownRef.current && !dropDownRef.current.contains(event.target)){
       setOpen(false)
+
+    }
+    if(dropDownRefTwo.current && !dropDownRefTwo.current.contains(event.target)){
+      setOpenTwo(false)
+
+    }
+    if(dropDownRefThree.current && !dropDownRefThree.current.contains(event.target)){
+      setOpenThree(false)
+
+    }
+    if(dropDownRefFour.current && !dropDownRefFour.current.contains(event.target)){
+      setOpenFour(false)
+
     }
   }
   document.addEventListener("mousedown",handleClickOutsile)
@@ -187,6 +203,7 @@ useEffect(()=>{
                   className="w-full border-[#98A2B3] border h-10  rounded-md px-[10px] text-xs leading-[14px] text-secondary flex items-center justify-between cursor-pointer"
                 >
                   <p>{selected ? selected : "Bangladesh"}</p>
+                  <LocationTwoIcon/>
                 </div>
 
                 <ul
@@ -210,7 +227,7 @@ useEffect(()=>{
             <div className="flex flex-col gap-1">
               <p className="font-medium leading-[22px]">Property type</p>
 
-              <div className="w-[245px]">
+              <div   ref={dropDownRefTwo}  className="w-[245px]">
                 <div
                   onClick={() => setOpenTwo(!openTwo)}
                   className="border-[#98A2B3]  border h-10  rounded-md px-[10px] text-xs leading-[14px] text-secondary flex items-center justify-between cursor-pointer"
@@ -242,7 +259,7 @@ useEffect(()=>{
             <div className="flex flex-col gap-1">
               <p className="font-medium leading-[22px]">Property type</p>
               <div className="flex">
-                <div className="w-[136px]">
+                <div ref={dropDownRefThree} className="w-[136px]">
                   <div
                     onClick={() => setOpenThree(!openThree)}
                     className="border-[#98A2B3] border-y border-l h-10  rounded-l-md px-[10px] text-xs leading-[14px] text-secondary flex items-center justify-between cursor-pointer"
@@ -271,7 +288,7 @@ useEffect(()=>{
                   </ul>
                 </div>
 
-                <div className="w-[136px]">
+                <div ref={dropDownRefFour} className="w-[136px]">
                   <div
                     onClick={() => setOpenFour(!openFour)}
                     className="border-[#98A2B3] border-y border h-10 rounded-r-md  px-[10px] text-xs leading-[14px] text-secondary flex items-center justify-between cursor-pointer"
