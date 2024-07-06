@@ -8,7 +8,7 @@ import GetInTouch from "@/components/GetInTouch";
 
 export default function Home() {
   return (
-    <main>
+    <main >
       <div>
         <Hero />
         <div className="bg-[#EFEFEF]">

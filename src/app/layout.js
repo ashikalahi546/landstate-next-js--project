@@ -15,17 +15,14 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className}>
-      
-   <div>
-   <TopNav/>
-   <Navber/>
+        <div className="scrollbar-custom h-screen overflow-y-scroll ">
+          <TopNav />
+          <Navber />
+          {children}
+          <Footer />
 
-        {children}
-        {/* <CityCard/> */}
-
-  <Footer/>     
-   </div>
-      
+          {/* <CityCard/> */}
+        </div>
       </body>
     </html>
   );

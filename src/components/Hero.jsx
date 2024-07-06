@@ -43,6 +43,17 @@ const Hero = () => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % slides.length);
   };
 
+useEffect(()=>{
+  const intervel =setInterval(()=>{
+    nextSlide();
+  },3000)
+  return()=> clearInterval(intervel)
+  
+},[])
+
+
+
+
   const [selected, setSelected] = useState("");
   const [select, setSelect] = useState("");
   const [selectTwo, setSelectTwo] = useState("");
@@ -54,8 +65,12 @@ const Hero = () => {
 
   const dropdownRef = useRef(null);
   const dropdownRef2 = useRef(null);
+  const dropdownRef3 = useRef(null);
+  const dropdownRef4 = useRef(null);
   HandleOutsideClickEvent(dropdownRef, setOpen);
   HandleOutsideClickEvent(dropdownRef2, setOpenTwo);
+  HandleOutsideClickEvent(dropdownRef3, setOpenThree);
+  HandleOutsideClickEvent(dropdownRef4, setOpenFour);
 
   // useEffect(()=>{
   //   const handleClickOutsile =(event)=>{
@@ -76,18 +91,18 @@ const Hero = () => {
     setOpen(false);
   };
 
-  // const handleItemClickTwo = (property) => {
-  //   setSelect(property.name);
-  //   setOpenTwo(false);
-  // };
-  // const handleItemClickThree = (propertyThree) => {
-  //   setSelectTwo(propertyThree.name);
-  //   setOpenThree(false);
-  // };
-  // const handleItemClickFour = (propertyThree) => {
-  //   setSelectThree(propertyThree.name);
-  //   setOpenFour(false);
-  // };
+  const handleItemClickTwo = (property) => {
+    setSelect(property.name);
+    setOpenTwo(false);
+  };
+  const handleItemClickThree = (propertyThree) => {
+    setSelectTwo(propertyThree.name);
+    setOpenThree(false);
+  };
+  const handleItemClickFour = (propertyThree) => {
+    setSelectThree(propertyThree.name);
+    setOpenFour(false);
+  };
 
   return (
     <div className="bg-[#EFEFEF]  ">
@@ -204,9 +219,9 @@ const Hero = () => {
             <div className="flex flex-col gap-1 ">
               <p className="font-medium leading-[22px]">Location</p>
 
-              <div ref={dropdownRef} className=" w-[245px] !bg-red-500 border">
+              <div ref={dropdownRef} className=" w-[245px] ">
                 <div
-                  onClick={() => setOpen(true)}
+                  onClick={() => setOpen(!open)}
                   className="w-full border-[#98A2B3] border h-10  rounded-md px-[10px] text-xs leading-[14px] text-secondary flex items-center justify-between cursor-pointer"
                 >
                   <p>{selected ? selected : "Bangladesh"}</p>
@@ -236,9 +251,8 @@ const Hero = () => {
             <div className="flex flex-col gap-1">
               <p className="font-medium leading-[22px]">Property type</p>
 
-              <div className="w-[245px]">
+              <div ref={dropdownRef2} className="w-[245px]">
                 <div
-                ref={dropdownRef2}
                   onClick={() => setOpenTwo(!openTwo)}
                   className="border-[#98A2B3]  border h-10  rounded-md px-[10px] text-xs leading-[14px] text-secondary flex items-center justify-between cursor-pointer"
                 >
@@ -269,7 +283,7 @@ const Hero = () => {
             <div className="flex flex-col gap-1">
               <p className="font-medium leading-[22px]">Property type</p>
               <div className="flex">
-                <div className="w-[136px]">
+                <div ref={dropdownRef3} className="w-[136px]">
                   <div
                     onClick={() => setOpenThree(!openThree)}
                     className="border-[#98A2B3] border-y border-l h-10  rounded-l-md px-[10px] text-xs leading-[14px] text-secondary flex items-center justify-between cursor-pointer"
@@ -300,7 +314,7 @@ const Hero = () => {
                   </ul>
                 </div>
 
-                <div className="w-[136px]">
+                <div ref={dropdownRef4} className="w-[136px]">
                   <div
                     onClick={() => setOpenFour(!openFour)}
                     className="border-[#98A2B3] border-y border h-10 rounded-r-md  px-[10px] text-xs leading-[14px] text-secondary flex items-center justify-between cursor-pointer"

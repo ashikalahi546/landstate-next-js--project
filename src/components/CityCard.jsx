@@ -100,7 +100,7 @@ const CityCard = () => {
                     </p>
                   </div>
                 </div>
-                <div className="border rounded-b-3xl py-4 px-4 bg-white w-[312px] h-[273px]">
+                <div className="border rounded-b-3xl py-4 px-4 bg-white w-[312px] ">
                   <div className="flex items-center justify-between	">
                     <h1 className="text-lg font-semibold">
                       ${singleCard?.price}
@@ -109,7 +109,7 @@ const CityCard = () => {
                       ({singleCard?.rating})
                     </p>
                   </div>
-                  <h3 title={singleCard?.fashion} className="pt-6">{singleCard?.fashion.slice(0,30)}...</h3>
+                  <h3 title={singleCard?.fashion} className="pt-6 leading-6">{singleCard?.fashion.slice(0,30)}...</h3>
                   <div className="flex items-center gap-[29px] pt-4">
                     <div className="flex items-center gap-2">
                       <RoomIcon />
@@ -130,7 +130,7 @@ const CityCard = () => {
                       {singleCard?.location}
                     </p>
                   </div>
-                  <button className="text-[#101010] absolute bottom-5  left-4   border border-[#D0D5DD] h-[41px] w-[280px] rounded-lg hover:bg-primary hover:border-none text-sm font-medium hover:text-white duration-100 ">
+                  <button className="text-[#101010] mt-6  border border-[#D0D5DD] h-[41px] w-[280px] rounded-lg hover:bg-primary hover:border-none text-sm font-medium hover:text-white duration-100 ">
                     View Details
                   </button>
                 </div>

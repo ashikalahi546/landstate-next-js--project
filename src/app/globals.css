@@ -25,3 +25,17 @@
 .select-box-shadow {
       box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
   }
+
+   @layer utilities {
+      .scrollbar-custom {
+        @apply scrollbar-thin scrollbar-track-white scrollbar-thumb-primary  ;
+      }
+      ::-webkit-scrollbar {
+        display: none;
+      }
+    } 
+
+
+
+
+    

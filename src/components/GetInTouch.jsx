@@ -44,23 +44,23 @@ const GetInTouch = () => {
             <div className="mt-[38px] flex flex-col gap-3">
               <div className="flex gap-4">
                 <input
-                  className=" w-full border-[#98A2B3] border outline-none h-12  rounded-[10px] px-4 text-xs leading-[14px] text-[#98A2B3] "
+                  className=" w-full border-[#98A2B3] border outline-none h-12  rounded-[10px] px-4 text-xs leading-[14px] text-[#98A2B3] focus:border-primary"
                   type="text"
                   placeholder="Full Name"
                 />
                 <input
-                  className=" w-full border-[#98A2B3] border outline-none h-12  rounded-[10px] px-4 text-xs leading-[14px] text-[#98A2B3] "
+                  className=" w-full border-[#98A2B3] border outline-none h-12  rounded-[10px] px-4 text-xs leading-[14px] text-[#98A2B3] focus:border-primary"
                   type="number"
                   placeholder="  Number"
                 />
               </div>
               <input
-                className=" w-full border-[#98A2B3] border outline-none h-12  rounded-[10px] px-4 text-xs leading-[14px] text-[#98A2B3] "
+                className=" w-full border-[#98A2B3] border outline-none h-12  rounded-[10px] px-4 text-xs leading-[14px] text-[#98A2B3] focus:border-primary"
                 type="email"
                 placeholder="Email address"
               />
               <textarea
-                className="w-full border-[#98A2B3] border outline-none h-[152px]  overflow-hidden resize-none rounded-[10px] px-4 text-xs leading-[14px] text-[#98A2B3] pt-4"
+                className="w-full border-[#98A2B3] border focus:border-primary outline-none h-[152px]  overflow-hidden resize-none rounded-[10px] px-4 text-xs leading-[14px] text-[#98A2B3] pt-4"
                 id=""
                 name=""
                 rows="4"
