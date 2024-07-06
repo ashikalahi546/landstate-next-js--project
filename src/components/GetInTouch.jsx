@@ -75,7 +75,7 @@ const GetInTouch = () => {
         </div>
         <div>
           <iframe
-            className="h-[630px] w-full rounded-[20px]"
+            className="h-[630px] w-full rounded-[20px] outline-none border-none"
             src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d14509.738235559555!2d90.0268032!3d24.6087031!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sbd!4v1719654288718!5m2!1sen!2sbd"
             allowFullScreen=""
             loading="lazy"

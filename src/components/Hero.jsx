@@ -107,7 +107,7 @@ useEffect(()=>{
   return (
     <div className="bg-[#EFEFEF]  ">
       <div className="bg-white">
-        <div className="mt-[70px] flex justify-between gap-[93px] w-[1320px] mx-auto pb-[126px] ">
+        <div className="mt-[70px] flex justify-between gap-[92.5px] w-[1320px] mx-auto pb-[126px] ">
           <div>
             <h1 className="text-6xl font-bold leading-[80px] text-secondary ">
               Discover Most
