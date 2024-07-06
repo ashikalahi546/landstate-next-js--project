@@ -18,13 +18,13 @@ const GetInTouch = () => {
               <div className="flex items-center gap-[10px]">
                 <PhoneTwoIcon />
                 <p className="text-secondary leading-6 font-medium">
-                  +013 456 789
+                  +0130583915
                 </p>
               </div>
               <div className="flex items-center gap-[10px]">
                 <EmailTwoIcon />
                 <p className="text-secondary leading-6 font-medium">
-                  skyline_property_sell@gmail.com
+                  ashikalahi546@gmail.com
                 </p>
               </div>
               <div className="flex items-center gap-[10px]">
