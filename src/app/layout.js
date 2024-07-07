@@ -3,7 +3,7 @@ import "./globals.css";
 import TopNav from "@/components/TopNav";
 import Navber from "@/components/Navber";
 import Footer from "@/components/Footer";
-// import CityCard from "@/components/CityCard";
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
@@ -21,7 +21,7 @@ export default function RootLayout({ children }) {
           {children}
           <Footer />
 
-          {/* <CityCard/> */}
+          
         </div>
       </body>
     </html>
